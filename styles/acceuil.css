@@ -1,19 +1,20 @@
 .profile {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    margin: auto;
-    border: solid 1px black;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin: auto;
+  /* border: solid 1px black; */
+  overflow: hidden;
 }
 
 .sectionprofile {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .bienv {
-    font-style: italic;
-    font-size: 1.5rem;
+  font-style: italic;
+  font-size: 1.5rem;
 }

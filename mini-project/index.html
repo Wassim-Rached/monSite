@@ -6,87 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>news or loose</title>
     <link rel="stylesheet" href="index.css" />
+    <script src="./index.js"></script>
+    <style>
+      body {
+        color: #fff;
+      }
+      input,
+      select {
+        padding: 4px;
+      }
+      #filters-form {
+        width: 100%;
+        margin: auto;
+      }
+      #top-move {
+        margin-bottom: 20px;
+      }
+    </style>
   </head>
   <body>
-    <script>
-      const API_URL =
-        "http://api.mediastack.com/v1/news?access_key=3d758f83285ae95dc919dabf94e369c1";
-
-      async function get_data() {
-        const response = await fetch(API_URL);
-
-        const data = await response.json();
-
-        data.data.forEach((element) => {
-          add_new_news(element);
-        });
-      }
-
-      function add_new_news(data) {
-        console.log({ data });
-        const DEFAULT_IMAGE =
-          "https://as1.ftcdn.net/v2/jpg/03/27/55/60/1000_F_327556002_99c7QmZmwocLwF7ywQ68ChZaBry1DbtD.jpg";
-
-        // Create a new <div> element with class "new"
-        var divNew = document.createElement("div");
-        divNew.className = "new";
-
-        // Create <div> element with class "top"
-        var divTop = document.createElement("div");
-        divTop.className = "top";
-
-        // Create an <img> element with id "img-post"
-        var imgPost = document.createElement("img");
-        imgPost.id = "img-post";
-        imgPost.src = data.image || DEFAULT_IMAGE;
-        imgPost.alt = "";
-
-        // Append the <img> element to the "top" div
-        divTop.appendChild(imgPost);
-
-        // Create <div> element with class "middle"
-        var divMiddle = document.createElement("div");
-        divMiddle.className = "middle";
-
-        // Create <div> element with class "author"
-        var divAuthor = document.createElement("div");
-        divAuthor.className = "author";
-        divAuthor.innerHTML = data.author;
-
-        // Create <div> element with class "country"
-        var divCountry = document.createElement("div");
-        divCountry.className = "country";
-        divCountry.innerHTML = data.country;
-
-        // Append the "author" and "country" divs to the "middle" div
-        divMiddle.appendChild(divAuthor);
-        divMiddle.appendChild(divCountry);
-
-        // Create <div> element with class "bottom"
-        var divBottom = document.createElement("div");
-        divBottom.className = "bottom";
-
-        // Create <p> element with class "source"
-        var pSource = document.createElement("p");
-        pSource.className = "source";
-        pSource.innerHTML = data.source;
-
-        // Append the "source" paragraph to the "bottom" div
-        divBottom.appendChild(pSource);
-
-        // Append the "top", "middle", and "bottom" divs to the "new" div
-        divNew.appendChild(divTop);
-        divNew.appendChild(divMiddle);
-        divNew.appendChild(divBottom);
-
-        // Append the "new" div to the document body
-        document.getElementById("news").appendChild(divNew);
-      }
-
-      window.onload = get_data();
-    </script>
     <div id="main">
-      <div class="alert bg-yellow">
+      <div id="top-move" class="alert bg-yellow">
         <div class="pill">BREAKING NEWS</div>
         <div class="message animate">
           <ul
@@ -96,25 +36,42 @@
             "
           >
             <li class="text msg-0">
-              First message is displayed here lorem ipsum, dolor sit amet
-              adispicing&nbsp;&nbsp;—&nbsp;&nbsp;
+              website created by Wassim Rached TI103
+              &nbsp;&nbsp;—&nbsp;&nbsp;&nbsp;&nbsp;—&nbsp;&nbsp;&nbsp;&nbsp;—&nbsp;&nbsp;
             </li>
             <li class="text msg-1">
-              Second Message Lorem ipsum dolor sit amet, consectetur adipiscing
-              elit. Praesent sed purus mi. Etiam et elit vulputate, venenatis
-              nibh in, lobortis elit. Phasellus ullamcorper purus ut diam
-              tincidunt venenatis. Sed tincidunt vestibulum
-              malesuada.&nbsp;&nbsp;—&nbsp;&nbsp;
+              This website is made with news api more known as mediastack :
+              <a target="_blank" href="https://mediastack.com/documentation"
+                >https://mediastack.com/documentation</a
+              >
+              &nbsp;&nbsp;—&nbsp;&nbsp;&nbsp;&nbsp;—&nbsp;&nbsp;&nbsp;&nbsp;—&nbsp;&nbsp;
             </li>
-            <li class="text msg-2">
-              Third message is shown scrolling here.&nbsp;&nbsp;—&nbsp;&nbsp;
-            </li>
+            <li class="text msg-2">Madam please note bahya n7eb nmchi DSI</li>
           </ul>
         </div>
       </div>
-
+      <form id="filters-form">
+        <label for="limit">limit</label>
+        <input
+          oninput="get_data()"
+          type="number"
+          id="limit"
+          name="limit"
+          placeholder="default is 25..."
+        />
+        <label for="keywords">keywords</label>
+        <input oninput="get_data()" type="text" name="keywords" id="keywords" />
+        <select onchange="get_data()" name="categorie" id="categorie">
+          <option value="eneral">eneral</option>
+          <option value="business">business</option>
+          <option value="entertainment">entertainment</option>
+          <option value="health">health</option>
+          <option value="science">science</option>
+          <option value="sports">sports</option>
+          <option value="technology">technology</option>
+        </select>
+      </form>
       <div id="news"></div>
-      <div onclick="">load more</div>
     </div>
   </body>
 </html>

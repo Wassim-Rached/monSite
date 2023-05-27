@@ -1,67 +1,269 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
     <title>Wassim Rached</title>
-    <link rel="stylesheet" href="../styles/style.css">
-</head>
-<header>
-    <div class="left"><a href="../index.html">WR</a></div>
-    <ul class="links">
-        <li><a href="#etud">Etudes</a></li>
-        <li><a href="#dipl">Diplômes</a></li>
-        <li><a href="#comp">Expériences</a></li>
-        <li><a href="#comp">Compétences</a></li>
-    </ul>
-</header>
-<div class="content">
-    <div id="etud" class="section">
-        <div class="title">Etudes</div>
-        <ul>
-            <li>bac eco 2021/2022</li>
-            <li>iset charguia 2022-2025</li>
-        </ul>
-    </div>
-    <iconify-icon icon="mdi:facebook"></iconify-icon>
+    <link rel="stylesheet" href="../styles/style.css" />
+    <style>
+      .main-content {
+        max-width: 900px;
+        width: 100%;
+        margin: 40px auto;
+      }
 
+      fieldset {
+        padding: 20px;
+        margin-bottom: 20px;
+      }
 
-    <div id="dipl" class="section">
-        <div class="title">Diplômes</div>
-        <ul>
-            <li>bac eco 2021/2022</li>
-            <li>iset charguia 2022-2025</li>
-        </ul>
-    </div>
+      legend {
+        color: red;
+        text-transform: uppercase;
+      }
 
-    <div id="comp" class="section">
-        <div class="title">Compétences</div>
-        <ul>
-            <li>bac eco 2021/2022</li>
-            <li>iset charguia 2022-2025</li>
-        </ul>
+      button {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        cursor: pointer;
+        padding: 7px 10px;
+        outline: none;
+        border: none;
+        background-color: black;
+        color: #fff;
+      }
+
+      label {
+        text-transform: capitalize;
+      }
+
+      input {
+        padding: 4px;
+      }
+    </style>
+  </head>
+  <body onload="reset_data()">
+    <header>
+      <div class="left"><a href="../index.html">WR</a></div>
+      <ul class="links">
+        <li onclick="convertToPDF()">PDF VERSION</li>
+      </ul>
+    </header>
+    <div class="main-content">
+      <form id="info-form">
+        <fieldset>
+          <legend>Informations</legend>
+          <table>
+            <tbody id="info-data"></tbody>
+          </table>
+          <input not-in-pdf type="text" name="saisir_label" />
+          <input not-in-pdf type="text" name="saisir_input" />
+          <button
+            not-in-pdf
+            onclick="saisir_new_info('info-data','info-form')"
+            type="button"
+          >
+            add
+          </button>
+        </fieldset>
+      </form>
+      <form id="competence-form">
+        <fieldset>
+          <legend>Competence</legend>
+          <table>
+            <tbody id="competance-data"></tbody>
+          </table>
+          <input not-in-pdf type="text" name="saisir_label" />
+          <input not-in-pdf type="text" name="saisir_input" />
+          <button
+            not-in-pdf
+            onclick="saisir_new_info('competance-data','competence-form')"
+            type="button"
+          >
+            add
+          </button>
+        </fieldset>
+      </form>
+      <form id="skills-form">
+        <fieldset>
+          <legend>Skills</legend>
+          <table>
+            <tbody id="skills-data"></tbody>
+          </table>
+          <input not-in-pdf type="text" name="saisir_label" />
+          <input not-in-pdf type="text" name="saisir_input" />
+          <button
+            not-in-pdf
+            onclick="saisir_new_info('skills-data','skills-form')"
+            type="button"
+          >
+            add
+          </button>
+        </fieldset>
+      </form>
     </div>
-</div>
-<footer>
-    <p>
-        wassim rached
-        &copy;
-    </p>
-    <div class="icons">
+    <footer>
+      <p>wassim rached &copy;</p>
+      <div class="icons">
         <a href="https://www.facebook.com/wassim.rached.55" target="_blank">
-            <img src="../images/facebook.png" width="20px" height="20px" alt="">
+          <img src="../images/facebook.png" width="20px" height="20px" alt="" />
         </a>
         <a href="mailto:wassimrached404@gmail.com" target="_blank">
-            <img src="../images/gmail.png" width="20px" height="20px" alt="">
+          <img src="../images/gmail.png" width="20px" height="20px" alt="" />
         </a>
-    </div>
-</footer>
+      </div>
+    </footer>
+    <script>
+      const info_form = document.getElementById("info-form");
+      const competence_form = document.getElementById("competence-form");
+      const skills_form = document.getElementById("skills-form");
 
-<body>
+      //
+      var info__array = [
+        ["Nom", "wassim rached"],
+        ["phone Number", "94284402"],
+      ];
+      var competence__array = [["bac", "eco 2022/2021"]];
+      var skills__array = [
+        ["Programming Languages", "Python , JavaScript"],
+        ["frameworks", ["Django", "Nodejs", "React", "Angular"]],
+      ];
 
-</body>
+      function reset_data() {
+        add_infos("info-data", info__array);
+        add_infos("competance-data", competence__array);
+        add_infos("skills-data", skills__array);
+      }
 
+      function saisir_new_info(doc_id, form_id) {
+        const form = document.getElementById(form_id);
+        let label_content = form.querySelector(
+          "input[name='saisir_label']"
+        ).value;
+        let input_content = form.querySelector(
+          "input[name='saisir_input']"
+        ).value;
+
+        const data_arr = [label_content, input_content];
+
+        if (doc_id == "info-data") {
+          info__array.push(data_arr);
+        } else if (doc_id == "competance-data") {
+          competence__array.push(data_arr);
+        } else if (doc_id == "skills-data") {
+          skills__array.push(data_arr);
+        }
+        reset_data();
+      }
+
+      function add_infos(doc_id, data) {
+        const parent = document.getElementById(doc_id);
+        parent.innerHTML = "";
+
+        data.forEach((element) => {
+          const new_tr = document.createElement("tr");
+          parent.append(new_tr);
+
+          const new_td1 = document.createElement("td");
+          const new_td2 = document.createElement("td");
+          new_tr.appendChild(new_td1);
+          new_tr.appendChild(new_td2);
+
+          const new_label = document.createElement("label");
+          new_label.innerHTML = element[0];
+          new_td1.appendChild(new_label);
+
+          const new_input = document.createElement("input");
+          new_input.setAttribute("type", "text");
+          new_input.setAttribute("value", element[1]);
+          new_td2.appendChild(new_input);
+        });
+      }
+    </script>
+
+    <script>
+      function convertToPDF() {
+        // Get the HTML content of the current page
+        let htmlContent = document.documentElement.outerHTML;
+
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlContent, "text/html");
+
+        const elementsToRemove = doc.querySelectorAll(
+          "[not-in-pdf], header, footer"
+        );
+        elementsToRemove.forEach((element) => element.remove());
+
+        const modifiedHTML = doc.documentElement.outerHTML;
+
+        htmlContent = modifiedHTML;
+
+        // Get the CSS stylesheets
+        const cssLinks = Array.from(
+          document.querySelectorAll('link[rel="stylesheet"]')
+        );
+
+        // Fetch all CSS stylesheets and convert them to text
+        Promise.all(
+          cssLinks.map((link) =>
+            fetch(link.href).then((response) => response.text())
+          )
+        )
+          .then((cssTexts) => {
+            // Combine CSS styles into a single inline style
+            const combinedCss = cssTexts.join("\n");
+
+            // Inject the combined CSS styles into the HTML content
+            const htmlWithStyles = htmlContent.replace(
+              /<\/head>/,
+              `<style>${combinedCss}</style></head>`
+            );
+
+            // Create the request payload
+            const payload = {
+              html: htmlWithStyles,
+            };
+
+            // Set the API endpoint URL and authorization token
+            const apiUrl = "https://api.pdfendpoint.com/v1/convert";
+
+            // Set the request options
+            const options = {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization:
+                  "Bearer 29299415a481e83b1a5dccc481cc3ba7a47393e7f4",
+              },
+              body: JSON.stringify(payload),
+            };
+
+            // Send the request to pdfEndpoint
+            fetch(apiUrl, options)
+              .then((response) => response.json())
+              .then((data) => {
+                // Handle the response data here
+                console.log(data);
+
+                // Optionally, you can redirect to the PDF URL instead of downloading it
+                const pdfUrl = data.data.url;
+                window.location.href = pdfUrl;
+              })
+              .catch((error) => {
+                // Handle any errors here
+                console.error(error);
+              });
+          })
+          .catch((error) => {
+            // Handle any CSS fetching errors here
+            console.error(error);
+          });
+      }
+    </script>
+  </body>
 </html>
